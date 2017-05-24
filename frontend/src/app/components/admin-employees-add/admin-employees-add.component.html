@@ -1,0 +1,135 @@
+<div class="form-container">
+  <h3>Добавить сотрудника</h3>
+
+  <form [formGroup]="employeeFormGroup" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-block">
+          <label for="firstName"
+                 class="label-bold">Введите имя и фамилию:</label>
+
+          <div class="few-inputs-container">
+            <input id="firstName"
+                   class="control"
+                   formControlName="firstName"
+                   placeholder="Имя"
+                   type="text">
+            <input id="lastName"
+                   class="control"
+                   formControlName="lastName"
+                   placeholder="Фамилия"
+                   type="text">
+          </div>
+        </div>
+        <div class="form-block">
+          <label for="telephone"
+                 class="label-bold">Контактные данные:</label>
+
+          <div class="few-inputs-container">
+            <div class="iconed-input-block">
+              <input id="telephone"
+                     class="control"
+                     formControlName="telephone"
+                     [textMask]="{mask: phoneMask}"
+                     pattern="\+7 \((\d\d\d)\) \d\d\d \d\d \d\d"
+                     placeholder="Номер телефона"
+                     type="tel">
+              <span class="input-icon">
+                <i class="material-icons">phone</i>
+              </span>
+            </div>
+            <div class="iconed-input-block">
+              <input id="email"
+                     class="control"
+                     formControlName="email"
+                     placeholder="E-mail"
+                     type="email"
+                     pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'>
+              <span class="input-icon">
+                <i class="material-icons">email</i>
+              </span>
+            </div>
+            <div class="iconed-input-block">
+              <input id="telegram"
+                     class="control"
+                     formControlName="telegram"
+                     placeholder="Telegram username">
+              <span class="input-icon">
+                <i class="material-icons">send</i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-block">
+          <label for="username"
+                 class="label-bold">Имя пользователя:</label>
+
+          <div class="iconed-input-block">
+            <input id="username"
+                   class="control"
+                   formControlName="username"
+                   placeholder="username"
+                   pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
+        <span class="input-icon">
+          <i class="material-icons">person</i>
+        </span>
+          </div>
+          <small class="validation-info-message"
+                 *ngIf="!employeeFormGroup.controls['username'].valid">Имя пользователя не может быть короче пяти
+            символов, должно начинаться с буквы и содержать только латинские буквы, цифры и символы точки, тире и
+            подчеркивание.
+          </small>
+        </div>
+        <div class="form-block">
+          <label for="password"
+                 class="label-bold">Пароль:</label>
+
+          <div class="iconed-input-block">
+            <input id="password"
+                   class="control"
+                   formControlName="password"
+                   placeholder="password"
+                   type="password">
+            <span class="input-icon">
+              <i class="material-icons">lock_outline</i>
+            </span>
+          </div>
+          <small *ngIf="employeeFormGroup.controls['password'].errors?.length">Пароль не может быть короче пяти символов
+          </small>
+        </div>
+        <div class="form-block">
+          <label for="passwordRepeat"
+                 class="label-bold">Повторите пароль:</label>
+
+          <div class="iconed-input-block">
+            <input id="passwordRepeat"
+                   class="control"
+                   formControlName="passwordRepeat"
+                   placeholder="repeat password"
+                   type="password">
+            <span class="input-icon">
+              <i class="material-icons">lock_outline</i>
+            </span>
+          </div>
+          <small class="validation-error-message"
+                 *ngIf="employeeFormGroup.errors?.passwordRepeat">Пароли не совпадают
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <a routerLink="../" class="btn">
+        Назад
+      </a>
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="employeeFormGroup.invalid || loading">
+        <span *ngIf="loading">Загрузка</span>
+        <span *ngIf="!loading">Добавить</span>
+      </button>
+    </div>
+  </form>
+</div>

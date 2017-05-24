@@ -1,0 +1,12 @@
+@import "../../../styles";
+
+.order-page {
+  @extend .form-container;
+  width: 600px;
+  @media all and (max-width: 600px) {
+    box-shadow: none;
+    padding: 2rem;
+    width: 100vw;
+  }
+}
+

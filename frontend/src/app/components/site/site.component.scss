@@ -1,0 +1,33 @@
+.main-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+    width: 100%;
+
+  .navigation {
+
+    display: flex;
+    justify-content: center; //space-around;
+    align-items: center;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    div {
+      margin: .5rem;
+      padding: .5rem .75rem;
+      a {
+        text-decoration: none;
+
+        cursor: pointer;
+        color: black;
+        &:hover {
+          color: blue;
+          border-bottom: 2px solid blue;
+        }
+      }
+    }
+  }
+}

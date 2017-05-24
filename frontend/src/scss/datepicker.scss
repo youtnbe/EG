@@ -1,0 +1,28 @@
+/*---------------------------DATEPICKER-------------------*/
+ngb-datepicker {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+  select {
+    border-radius: 0 !important;
+    background-color: $gray-lighter !important;
+    border: none !important;
+    &:focus {
+      //transform: translateY(-5px) translateX(-5px);
+      //background-color: white !important;
+      //box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+
+    }
+  }
+  div[ngbdatepickerdayview] {
+    border-radius: 0 !important;
+  }
+  div[ng-reflect-selected="true"] {
+    background-color: blue !important;
+  }
+
+}
+
+.ngb-dp-navigation-chevron, .ngb-dp-weekday {
+  color: #464a4c !important;
+}

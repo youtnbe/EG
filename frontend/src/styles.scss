@@ -1,0 +1,31 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "scss/material-icons";
+@import "scss/forms";
+@import "scss/button";
+@import "scss/datepicker";
+@import "scss/app-statuses";
+@import "scss/blocks";
+
+body {
+}
+
+*::selection {
+  background-color: blue;
+  color: white;
+}
+
+a {
+  color: blue;
+  &:hover {
+    text-decoration: underline;
+    color: blue;
+  }
+  &:active {
+
+  }
+
+}
+
+a[href^='tel:'] {
+  white-space: nowrap;
+}

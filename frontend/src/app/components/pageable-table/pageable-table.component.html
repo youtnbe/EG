@@ -1,0 +1,79 @@
+<div class="table-functions">
+  <div class="filter-container">
+    <a class="toggle-link filter-toggle"
+       (click)="toggleFilter()">
+      <span *ngIf="filterVisible">Фильтр -</span>
+      <span *ngIf="!filterVisible">Фильтр +</span>
+    </a>
+    <ng-content *ngIf="filterVisible"></ng-content>
+  </div>
+
+  <div class="page-size-container">
+    <span>Записей на странице</span>
+    <a class="toggle-link filter-toggle"
+       (click)="setPageSize(2)">
+      2
+    </a>
+    <a class="toggle-link filter-toggle"
+       (click)="setPageSize(25)">
+      25
+    </a>
+    <a class="toggle-link filter-toggle"
+       (click)="setPageSize(50)">
+      50
+    </a>
+    <a class="toggle-link filter-toggle"
+       (click)="setPageSize(100)">
+      100
+    </a>
+  </div>
+</div>
+
+<div class="table-container">
+  <div *ngIf="loading" class="full-table-message"><span class="preloader">Загрузка</span></div>
+  <div *ngIf="empty && !loading" class="full-table-message"><span class="message">Список пуст</span></div>
+  <table class="application-table"
+         *ngIf="!empty">
+    <thead>
+    <tr>
+      <th *ngFor="let column of columns">{{column['header']}}</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of rows">
+      <td *ngFor="let column of columns">
+        <span *ngIf="utilities.isFunction(column['format'])"
+              [innerHTML]="column['format'](utilities.pathResolve(row, column['name'])) | safeHtml"></span>
+        <span *ngIf="!utilities.isFunction(column['format'])"
+              [innerHTML]="utilities.pathResolve(row, column['name']) | safeHtml"></span>
+      </td>
+      <td style="white-space: nowrap; text-align: right">
+        <button class="table-control">
+        </button>
+        <button (click)="editRow(row)" class="table-control">
+          <i class="material-icons">edit</i>
+        </button>
+        <button (click)="deleteRow(row._id)" class="table-control">
+          <i class="material-icons">delete_forever</i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-navigation"
+     *ngIf="pageCount > 1">
+  <button (click)="loadPage(1)" [disabled]="currentPage == 1"><i class="material-icons">first_page</i></button>
+  <button (click)="loadPage(currentPage-1)" [disabled]="currentPage == 1"><i class="material-icons">navigate_before</i>
+  </button>
+  <div class="current-page">{{currentPage}} / {{pageCount}}</div>
+  <button (click)="loadPage(currentPage+1)" [disabled]="currentPage == pageCount"><i
+    class="material-icons">navigate_next</i></button>
+  <button (click)="loadPage(pageCount)" [disabled]="currentPage == pageCount"><i class="material-icons">last_page</i>
+  </button>
+</div>
+
+
+

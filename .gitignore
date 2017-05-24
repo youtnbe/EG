@@ -1,0 +1,6 @@
+
+.idea/
+backend/node_modules
+db/
+frontend/node_modules
+npm-debug.log

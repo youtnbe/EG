@@ -1,0 +1,11 @@
+<div class="list-header">
+  <a routerLink="./add" class="btn btn-primary">Добавить</a>
+</div>
+<pageable-table [service]="employeeService"
+                [columns]="tableFormat"
+                (onDeleteRow)="onDeleteRow($event)"
+                (onError)="onError($event)"></pageable-table>
+
+<app-modal #confirm>
+  <confirm (onConfirm)="onDeleteConfirm($event)" body></confirm>
+</app-modal>

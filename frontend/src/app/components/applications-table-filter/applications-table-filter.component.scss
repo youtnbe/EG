@@ -1,0 +1,46 @@
+@import "../../../scss/app-statuses";
+
+.filter-form {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.statuses-filter {
+  $height: 2px;
+  $light-grey: #f4f4f4;
+  $grey: rgba(0, 0, 0, 0.05);
+  list-style-type: none;
+  padding: 0;
+
+  display: flex;
+  li {
+    input {
+      display: none;
+      & + label {
+        cursor: pointer;
+        transition: all 0.1s ease-in-out;
+      }
+      &:not(checked) + label {
+        background-color: $grey;
+        color: black;
+      }
+      &:checked + label {
+        transform: translateY(-$height) translateX(-$height);
+        box-shadow: $height $height 0 $grey;
+        border: none;
+        @each $status in $statuses {
+          &.app-status-#{$status} {
+            @extend .app-status-#{$status}
+          }
+        }
+      }
+    }
+    &.select-all-statuses-btn {
+      padding: 0 10px;
+      white-space: nowrap;
+    }
+  }
+}

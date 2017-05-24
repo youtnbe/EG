@@ -1,0 +1,12 @@
+.toggle-link {
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  color: blue !important;
+  border-bottom: 1px dotted blue;
+  &:hover {
+    color: #000088 !important;
+    text-decoration: none;
+  }
+}

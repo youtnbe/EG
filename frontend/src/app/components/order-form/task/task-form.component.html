@@ -1,0 +1,101 @@
+<div class="order-header">
+  <h3>Добавьте заявку</h3>
+</div>
+<form [formGroup]="taskForm">
+  <div class="form-block">
+    <label for="problemName"
+           class="label-bold">В чем ваша проблема?</label>
+
+    <div class="iconed-input-block">
+      <input id="problemName"
+             class="control"
+             formControlName="name"
+             placeholder="В чем ваша проблема?">
+      <span class="input-icon">
+        <i class="material-icons">create</i>
+      </span>
+    </div>
+  </div>
+  <div class="form-block">
+    <label for="problemDesc">Опишите проблему подробнее:</label>
+    <textarea id="problemDesc"
+              class="control"
+              name="problemDesc"
+              formControlName="desc"
+              placeholder="Опишите вашу проблему максимально подробно. Не забудьте указать модель техники, характер поломки, причину поломки и т.д."
+              rows="4"></textarea>
+  </div>
+  <div class="form-block">
+    <label for="Date">Когда нужно решить проблему?</label>
+
+    <div class="few-inputs-container-horizontal">
+      <div class="iconed-input-block">
+        <!--<input id="Date"
+               class="date-input"
+               name="dateRus"
+               formControlName="dateRus"
+               placeholder="Дата"
+               (click)="d.toggle()"
+               readonly>-->
+        <input id="Date"
+               class="control"
+               name="date"
+               formControlName="date"
+               ngbDatepicker #d="ngbDatepicker"
+               [minDate]="minDate"
+               placeholder="Дата"
+               autocomplete="off"
+               (click)="d.toggle()">
+        <span class="input-icon">
+          <i class="material-icons">date_range</i>
+        </span>
+      </div>
+
+      <div class="iconed-input-block">
+        <input id="Time"
+               name="time"
+               class="control"
+               formControlName="time"
+               [textMask]="{mask: timeMask}"
+               pattern="^([0-1]\d|2[0-3]):([0-5]\d)"
+               placeholder="Время">
+        <span class="input-icon">
+          <i class="material-icons">access_time</i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label><input type="radio"
+                  name="adrSwitch"
+                  formControlName="adrSwitch"
+                  [value]=false
+                  checked> Я сам привезу технику в мастерскую</label>
+    <label><input type="radio"
+                  name="adrSwitch"
+                  formControlName="adrSwitch"
+                  [value]=true> Я хочу чтобы мастер приехал по моему адресу</label>
+
+    <div class="form-block">
+      <div class="iconed-input-block">
+        <input
+          class="control"
+          id="Address"
+          name="address"
+          formControlName="adrs"
+          placeholder="Адрес"/>
+
+        <span class="input-icon">
+          <i class="material-icons">location_on</i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="./contact">
+    <button type="button"
+            class="btn btn-primary"
+            [disabled]="taskForm.invalid">Далее
+    </button>
+  </a>
+</form>

@@ -1,0 +1,68 @@
+<form class="filter-form grey-convex-block"
+      [formGroup]="filterForm">
+  <div class="form-block">
+    <label class="label-bold">Статус:</label>
+    <ul formGroupName="statuses" class="statuses-filter">
+      <li *ngFor="let status of applicationStatuses">
+        <input type="checkbox"
+               formControlName="{{status.id}}"
+               id="{{status.code}}">
+        <label for="{{status.code}}"
+               class="app-status-filter {{status.class}}">{{status.name}}</label>
+      </li>
+      <li class="select-all-statuses-btn">
+        <a class="toggle-link"
+           (click)="selectAllStatuses()">Выбрать все</a></li>
+    </ul>
+  </div>
+  <div class="form-block">
+    <label class="label-bold"
+           for="workman">Исполнитель:</label>
+
+    <div class="input-block-w-links">
+      <select id="workman"
+              class="control"
+              formControlName="workman">
+        <option [ngValue]="-1">
+          Все
+        </option>
+        <option [ngValue]="null">
+          Не назначен
+        </option>
+        <option *ngFor="let employee of employees"
+                [ngValue]="employee.id">
+          {{employee.firstName + ' ' + employee.lastName}}
+        </option>
+      </select>
+      <a (click)="setWorkman(-1)"
+         class="toggle-link">
+        Все
+      </a>
+      <a (click)="setWorkman(null)"
+         class="toggle-link">
+        Неназначенные
+      </a>
+      <a (click)="setWorkmanMe()"
+         class="toggle-link">
+        Назначенные мне
+      </a>
+    </div>
+  </div>
+  <div class="form-block">
+    <label class="label-bold">Поиск:</label>
+
+    <div class="iconed-input-block">
+      <input id="customerName"
+             class="control"
+             formControlName="search"
+             placeholder="">
+      <span class="input-icon">
+        <i class="material-icons">search</i>
+      </span>
+    </div>
+  </div>
+  <a (click)="resetFilter()"
+     class="toggle-link">
+    Сбросить
+  </a>
+</form>

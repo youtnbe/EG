@@ -1,0 +1,71 @@
+
+
+.admin-panel-header {
+  .header {
+
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      padding: 1rem;
+      color: blue;
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    .user-panel {
+      padding: 1rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      .username {
+        padding: 0.5rem 0.75rem;
+        line-height: 1.25;
+        font-size: 1rem;
+      }
+      .logout-btn {
+        border: 1px solid blue;
+        display: block;
+        font-weight: normal;
+
+        line-height: 1.25;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+
+        border-radius: 0;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        outline: none;
+
+        color: blue;
+        background-color: white;
+
+        &:hover {
+          color: white;
+          background-color: blue;
+        }
+      }
+    }
+  }
+
+  .navigation {
+    padding: 1rem;
+    font-size: 1.5rem;
+    a {
+      color: blue;
+    }
+  }
+}
+
+.admin-panel-body {
+  padding: 1rem;
+}
+
+

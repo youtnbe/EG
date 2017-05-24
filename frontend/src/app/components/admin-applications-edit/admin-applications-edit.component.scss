@@ -1,0 +1,65 @@
+.application-editor-header {
+  display: flex;
+  justify-content: space-between;
+  & > div {
+    padding: 0 15px;
+    margin-bottom: 1rem;
+  }
+  .task-number {
+    font-size: 1rem;
+  }
+  .task-name {
+    margin-bottom: 1rem;
+  }
+  .task-date {
+    font-style: italic;
+    margin-bottom: 0;
+  }
+  .back-link {
+  }
+}
+
+.controls-block {
+  margin-bottom: 1rem;
+
+  .complete {
+    display: inline-flex;
+    padding: 0.5rem 0.75rem;
+    & > * {
+      margin-right: 0.5rem;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    background: seagreen;
+    color: white;
+    font-weight: bold;
+
+  }
+}
+
+.application-info {
+  .group {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem;
+
+    .input-container {
+      width: 60%;
+    }
+
+  }
+  & > div:last-child {
+    margin-bottom: 0;
+
+  }
+}
+
+.row > div {
+  //border: 1px solid red;
+}
+
+.buttons-col {
+  margin-top: 1rem;
+}

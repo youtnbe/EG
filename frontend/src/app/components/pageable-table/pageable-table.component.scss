@@ -1,0 +1,159 @@
+.table-functions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.filter-container {
+  margin: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .filter-toggle {
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+.page-size-container {
+  margin: 1rem;
+}
+
+.table-container {
+  position: relative;
+  min-height: 4rem;
+}
+
+.full-table-message {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+
+  span {
+    padding: 0.2rem 0.5rem;
+  }
+  .preloader {
+    background-color: red;
+    color: white;
+  }
+  .message {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+.application-table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+  tr {
+    transition: all 0.1s ease-in-out;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    &:nth-child(2n) {
+      background-color: #ededed;
+    }
+    th {
+      background-color: white;
+      padding: 0.75rem;
+      vertical-align: bottom;
+      font-weight: bold;
+      border-bottom: 2px solid blue;
+    }
+    td {
+      cursor: pointer;
+      padding: 0.75rem;
+
+    }
+  }
+  &:hover {
+    tbody {
+    }
+  }
+  tbody {
+
+    tr {
+      transition: all 0.1s ease-in-out;
+      box-sizing: border-box;
+      &:hover {
+        background-color: white;
+        box-shadow: inset 0 0 0 2px blue, 7px 7px 0 rgba(0, 0, 0, .3);
+        transform: translateY(-7px) translateX(-7px);
+      }
+
+      th {
+        padding: 0.75rem;
+        vertical-align: bottom;
+        font-weight: bold;
+      }
+      td {
+        cursor: pointer;
+        padding: 0.75rem;
+
+      }
+    }
+
+  }
+
+  .table-control {
+    line-height: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.5rem;
+
+    border-radius: 0;
+    //transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+
+    color: blue;
+    background-color: transparent;
+    border: none;
+  }
+
+}
+
+.table-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .current-page {
+    display: inline-block;
+    padding: 0.5rem;
+  }
+  button {
+    box-sizing: content-box;
+    border: none;
+    display: inline-block;
+    font-weight: normal;
+
+    line-height: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0.5rem;
+
+    border-radius: 0;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    outline: none;
+
+    color: blue;
+    background-color: white;
+
+    &:hover {
+      box-shadow: inset 0 0 0 1px blue;
+    }
+
+  }
+}

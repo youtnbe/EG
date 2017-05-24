@@ -1,0 +1,41 @@
+<div class="login-form-container">
+  <form name="form"
+        (ngSubmit)="f.form.valid && login()"
+        #f="ngForm"
+        novalidate
+        class="login-form">
+    <div class="input-container" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+
+      <input id="username"
+             type="text"
+             name="username"
+             [(ngModel)]="model.username"
+             #username="ngModel"
+             placeholder="Логин"
+             required/>
+      <span class="input-icon">
+        <i class="material-icons">person</i>
+      </span>
+    </div>
+
+    <div class="input-container" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+
+      <input id="password"
+             type="password"
+             name="password"
+             [(ngModel)]="model.password"
+             #password="ngModel"
+             placeholder="Пароль"
+             required/>
+      <span class="input-icon">
+        <i class="material-icons">lock</i>
+      </span>
+    </div>
+    <button [disabled]="loading" class="login-btn">
+      <span *ngIf="loading">Загрузка</span>
+      <span *ngIf="!loading">Войти</span>
+    </button>
+  </form>
+
+  <div *ngIf="error" class="error-message" (click)="error=''">{{error}}</div>
+</div>

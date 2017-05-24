@@ -1,0 +1,11 @@
+<pageable-table [service]="applicationsService"
+                [columns]="tableFormat"
+                (onDeleteRow)="onDeleteRow($event)"
+                (onEditRow)="openEditPage($event)"
+                (onError)="onError($event)">
+  <applications-table-filter #filter></applications-table-filter>
+</pageable-table>
+
+<app-modal #confirm>
+  <confirm (onConfirm)="onDeleteConfirm($event)" body></confirm>
+</app-modal>

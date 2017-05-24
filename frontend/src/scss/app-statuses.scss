@@ -1,0 +1,32 @@
+.app-status {
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.app-status-table {
+  @extend .app-status;
+}
+
+.app-status-filter {
+  @extend .app-status;
+  margin: 0;
+}
+
+$statuses: accepted, confirmed, underway, completed;
+
+.app-status-accepted {
+  background-color: red;
+  color: white;
+}
+.app-status-confirmed {
+  background-color: yellow;
+  color: black;
+}
+.app-status-underway {
+  background-color: blue;
+  color: white;
+}
+.app-status-completed {
+  background-color: green;
+  color: white;
+}
