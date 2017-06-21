@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, ContentChild } from '@angular/core';
 import { Application } from '../../models/application';
 import { PageableSortableService } from '../../services/pageable-sortable.service';
+import { PageableSortableCollection } from '../../services/pageable-sortable-collection.service';
 import { ModalComponent } from '../modal/modal.component';
 import { Utilities, Dictionaries } from '../../utilities/utilities';
 import { Filter } from '../../interfaces/filter.interface';
@@ -13,9 +14,8 @@ import { Filter } from '../../interfaces/filter.interface';
 export class PageableTableComponent {
 
   rows:Array<any>;
-  @Input() service:PageableSortableService;
+  @Input() service:PageableSortableCollection;
   @Input() columns:Array<any>;
-  @Input() pageSize:number = 50;
 
   @Output() onDeleteRow = new EventEmitter<boolean>();
   @Output() onEditRow = new EventEmitter<boolean>();
@@ -41,7 +41,6 @@ export class PageableTableComponent {
   }
 
   ngOnInit() {
-    this.refresh();
     if (this.filterComponent) {
       this.filterComponent.onChangeFilter.subscribe((data) => {
         this.filter = data;
@@ -57,7 +56,7 @@ export class PageableTableComponent {
 
   fetch() {
     this.loadOn();
-    return this.service.getPage(this.currentPage, this.pageSize, null, null, this.filter)
+    return this.service.page(this.currentPage, null, null, this.filter)
       .finally(() => {
         this.loadOff();
       });
@@ -88,9 +87,9 @@ export class PageableTableComponent {
 
   public refresh() {
     this.fetch().subscribe((data) => {
-      this.rowsCount = this.service.getRowCount();
+      this.rowsCount = this.service.length;
       this.rows = data;
-      this.pageCount = Math.ceil(this.rowsCount / this.pageSize);
+      this.pageCount = Math.ceil(this.rowsCount / this.service.pageSize);
       if (this.pageCount == 0)
         this.currentPage = 0;
       this.empty = (this.rowsCount == 0);
@@ -104,7 +103,8 @@ export class PageableTableComponent {
   }
 
   setPageSize(n) {
-    this.pageSize = n;
+    this.currentPage = 1;
+    this.service.pageSize = n;
     this.refresh();
   }
 }

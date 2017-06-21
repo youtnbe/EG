@@ -32,11 +32,10 @@ export class ApplicationsTableFilterComponent implements Filter {
 
   filterForm:FormGroup;
 
-
   constructor(private employeeService:EmployeeService,
               private authenticationService:AuthService) {
 
-    this.employeeService.getEmployees().subscribe((data) => {
+    this.employeeService.fetch().subscribe((data) => {
       this.employees = data;
     }, (error) => {
       console.log(error);

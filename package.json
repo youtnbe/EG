@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "db": "C:/MongoDB/bin/mongod --dbpath db",
-    "backend": "cd backend && npm start",
-    "frontend": "cd frontend && npm start",
+    "be": "cd backend && npm start",
+    "fe": "cd frontend && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

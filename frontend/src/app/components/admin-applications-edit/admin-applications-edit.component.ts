@@ -23,7 +23,7 @@ import { EmployeeService } from '../../services/employee.service';
 })
 export class AdminApplicationsEditComponent {
 
-  private application:Application = new Application();
+  private application:any = new Application();
   private employees:Employee[];
   private statuses = Dictionaries.applicationStatuses;
   private nextStatusButtonText:string = '';
@@ -66,10 +66,10 @@ export class AdminApplicationsEditComponent {
               private employeeService:EmployeeService,
               private authenticationService:AuthService) {
 
-    this.employeeService.getEmployees().subscribe((data) => {
+    this.employeeService.fetch().subscribe((data) => {
       this.employees = data;
       this.idSubscription = this.route.params.subscribe((params) => {
-        this.applicationsService.getApplicationById(params['id']).subscribe((data) => {
+        this.applicationsService.item(params['id']).subscribe((data) => {
           this.application = data;
           this.setFormFromModel();
         }, (error) => {
@@ -96,11 +96,11 @@ export class AdminApplicationsEditComponent {
         name: this.application.task.name,
         description: this.application.task.description,
         date: {
-          day: this.application.task.date.getDate(),
-          month: this.application.task.date.getMonth() + 1,
-          year: this.application.task.date.getFullYear(),
+          day: (new Date(this.application.task.date)).getDate(),
+          month: (new Date(this.application.task.date)).getMonth() + 1,
+          year: (new Date(this.application.task.date)).getFullYear(),
         },
-        time: this.application.task.date.toLocaleString("ru", {
+        time: (new Date(this.application.task.date)).toLocaleString("ru", {
           hour: 'numeric',
           minute: 'numeric'
         }),
@@ -119,7 +119,7 @@ export class AdminApplicationsEditComponent {
 
   saveApplication() {
     this.loading = true;
-    return this.applicationsService.updateApplication(<JSON>this.applicationEditFormGroup.value)
+    return this.applicationsService.save(<JSON>this.applicationEditFormGroup.value)
       .finally(() => this.loading = false)
   }
 
@@ -161,6 +161,5 @@ export class AdminApplicationsEditComponent {
   ngOnDestroy() {
     this.idSubscription.unsubscribe();
   }
-
 
 }

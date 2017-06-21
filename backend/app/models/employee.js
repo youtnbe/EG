@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
+var roleScheme = require('./role').schema;
 autoIncrement.initialize(mongoose.connection);
 
 var employeeScheme = new Schema({
@@ -40,6 +41,10 @@ var employeeScheme = new Schema({
     lastName: {
         type: String,
         maxlength:[50,"tooLong"]
+    },
+    role: {
+        type: roleScheme,
+        default: null
     }
 });
 module.exports.Schema = employeeScheme;

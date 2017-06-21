@@ -63,7 +63,7 @@ export class AdminEmployeesListComponent {
     this.table.loadOn();
     if (answer) {
       if (this.deletedEmployeeId) {
-        this.employeeService.deleteEmployee(this.deletedEmployeeId).subscribe((data) => {
+        this.employeeService.remove(this.deletedEmployeeId).subscribe((data) => {
           this.table.refresh();
           this.deletedEmployeeId = null;
         }, (error) => {

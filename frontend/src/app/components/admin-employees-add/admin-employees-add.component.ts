@@ -47,7 +47,7 @@ export class AdminEmployeesAddComponent {
 
   submit() {
     this.loading = true;
-    this.employeeService.createEmployee(<JSON>this.employeeFormGroup.value)
+    this.employeeService.push(<JSON>this.employeeFormGroup.value)
       .finally(() => this.loading = false)
       .subscribe((data) => {
         console.log(data);

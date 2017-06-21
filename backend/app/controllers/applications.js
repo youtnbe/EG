@@ -147,6 +147,8 @@ app.get("/applications", (req, res) => {
                 message: 'Ошибка сервера.'
             });
         }
+        console.log(page);
+        console.log(pageSize);
         Application.find(filter).sort(sort).skip(page * pageSize).limit(pageSize).find({}, (err, docs) => {
             if (err) {
                 return res.status(500).json({

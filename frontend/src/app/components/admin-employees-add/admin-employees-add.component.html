@@ -60,7 +60,28 @@
             </div>
           </div>
         </div>
+       <!-- <div class="form-block">
+          <label for="role">Роль сотрудника:</label>
 
+          <select id="role"
+                  class="control">
+            <option [ngValue]="null"
+                    [selected]="applicationEditFormGroup.value.workman == null">
+              Не назначен
+            </option>
+            <option *ngFor="let employee of employees"
+                    [ngValue]="employee"
+                    [selected]="applicationEditFormGroup.value.workman && applicationEditFormGroup.value.workman.id == employee.id">
+              {{employee.firstName + ' ' + employee.lastName}}
+            </option>
+          </select>
+          <a *ngIf="applicationEditFormGroup.value.status < 3"
+             (click)="appointToMe()"
+             class="toggle-link">
+            Назначить мне
+          </a>
+        </div>
+-->
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="form-block">

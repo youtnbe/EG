@@ -2,6 +2,7 @@ var app = (require('express').Router)();
 
 //publick
 app.use(require('./applicationsPublic'));
+app.use(require('./roles'));
 
 //auth
 app.use(require('./auth'));

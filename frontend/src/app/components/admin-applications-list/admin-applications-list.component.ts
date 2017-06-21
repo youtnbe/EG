@@ -31,6 +31,7 @@ export class AdminApplicationsListComponent {
     header: 'Дата подачи заявки',
     type: 'date',
     format: function (raw) {
+      raw = new Date(raw);
       return raw.toLocaleString("ru", {
         month: 'numeric',
         day: 'numeric',
@@ -52,6 +53,7 @@ export class AdminApplicationsListComponent {
     header: 'Дата исполнения',
     type: 'date',
     format: function (raw) {
+      raw = new Date(raw);
       return raw.toLocaleString("ru", {
         month: 'numeric',
         day: 'numeric',
@@ -104,7 +106,7 @@ export class AdminApplicationsListComponent {
     this.table.loadOn();
     if (answer) {
       if (this.deletedApplicationId) {
-        this.applicationsService.deleteApplication(this.deletedApplicationId).subscribe((data) => {
+        this.applicationsService.remove(this.deletedApplicationId).subscribe((data) => {
           this.table.refresh();
           this.deletedApplicationId = null;
         }, (error) => {

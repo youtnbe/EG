@@ -1,5 +1,6 @@
 <div class="table-functions">
-  <div class="filter-container">
+  <div *ngIf="filterComponent"
+       class="filter-container">
     <a class="toggle-link filter-toggle"
        (click)="toggleFilter()">
       <span *ngIf="filterVisible">Фильтр -</span>
