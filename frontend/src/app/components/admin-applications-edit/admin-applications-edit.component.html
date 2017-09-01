@@ -1,247 +1,231 @@
 <div class="form-container">
-  <div class="row application-editor-header">
-    <div class="">
-      <h5 class="task-number">Заявка №{{application.number}}</h5>
+    <loadable [loading]="loading">
+        <div class="row application-editor-header">
+            <div class="">
+                <h5 class="task-number">Заявка №{{application?.number}}</h5>
 
-      <h2 class="task-name">{{application.task ? application.task.name : ''}}</h2>
+                <h2 class="task-name">{{application?.task?.name}}</h2>
 
-      <div class="task-date">{{application.date_create ? application.date_create.toLocaleString("ru", {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric'
-        }) : ''}}
-      </div>
-    </div>
-    <div class=" back-link">
-      <a routerLink="../../">
-        < Назад
-      </a>
-    </div>
-  </div>
-
-  <hr>
-
-  <form [formGroup]="applicationEditFormGroup" (ngSubmit)="submit()">
-    <div class="row">
-      <div class="col controls-block">
-        <button *ngIf="applicationEditFormGroup.value.status < 3"
-                type="button"
-                (click)="incStatus()"
-                class="btn btn-default">
-          {{nextStatusButtonText}}
-        </button>
-        <div *ngIf="applicationEditFormGroup.value.status >= 3"
-             class="complete">
-          <i class="material-icons">done</i>
-          <span>Завершена</span>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="form-block">
-          <label for="workman">Исполнитель:</label>
-
-          <select id="workman"
-                  class="control"
-                  formControlName="workman">
-            <option [ngValue]="null"
-                    [selected]="applicationEditFormGroup.value.workman == null">
-              Не назначен
-            </option>
-            <option *ngFor="let employee of employees"
-                    [ngValue]="employee"
-                    [selected]="applicationEditFormGroup.value.workman && applicationEditFormGroup.value.workman.id == employee.id">
-              {{employee.firstName + ' ' + employee.lastName}}
-            </option>
-          </select>
-          <a *ngIf="applicationEditFormGroup.value.status < 3"
-             (click)="appointToMe()"
-             class="toggle-link">
-            Назначить мне
-          </a>
-        </div>
-      </div>
-
-      <div class="         col-md-6 col-sm-6 col-xs-12">
-
-        <div class="form-block">
-          <label for="status"
-                 class="">Статус:</label>
-
-          <select id="status" class=""
-                  class="control"
-                  formControlName="status">
-            <option value="" disabled selected>Выберите статус</option>
-            <option *ngFor="let status of statuses" [ngValue]="status.id">{{status.name}}
-            </option>
-          </select>
-          <a *ngIf="applicationEditFormGroup.value.status < 3"
-             (click)="incStatus()"
-             class="toggle-link">
-            {{nextStatusButtonText}}
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-12" formGroupName="task">
-        <div class="form-block">
-          <label for="problemName"
-                 class="label-bold">Тема:</label>
-
-          <input id="problemName"
-                 class="control"
-                 formControlName="name"
-                 placeholder="Место для темы">
-        </div>
-
-        <div class="form-block">
-          <label for="problemDesc">Описание:</label>
-
-          <textarea id="problemDesc"
-                    class="control"
-                    autosize
-                    name="problemDesc"
-                    formControlName="description"
-                    placeholder="Место для описания"
-                    rows="5"></textarea>
-        </div>
-      </div>
-      <div class=" col-md-6 col-sm-6 col-xs-12">
-        <div class="form-block" formGroupName="customer">
-          <label for="customerName">Контактные данные:</label>
-
-          <div class="few-inputs-container">
-            <div class="iconed-input-block">
-              <input id="customerName"
-                     class="control"
-                     formControlName="fio"
-                     placeholder="Имя Фамилия">
-              <span class="input-icon">
-                <i class="material-icons">person</i>
-              </span>
+                <div class="task-date">{{application?.date_create}}
+                </div>
             </div>
-            <div class="iconed-input-block">
-              <input id="customerEmail"
-                     class="control"
-                     formControlName="email"
-                     placeholder="E-mail"
-                     type="email"
-                     pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'>
-
-              <span class="input-icon">
-                <i class="material-icons">email</i>
-              </span>
+            <div class=" back-link">
+                <a routerLink="../../">
+                    < Назад
+                </a>
             </div>
-            <div class="iconed-input-block">
-              <input id="customerTelephone"
-                     class="control"
-                     formControlName="telephone"
-                     [textMask]="{mask: phoneMask}"
-                     pattern="\+7 \((\d\d\d)\) \d\d\d \d\d \d\d"
-                     placeholder="Телефон"
-                     type="tel"/>
-              <span class="input-icon">
-                <i class="material-icons">phone</i>
-              </span>
-            </div>
-          </div>
         </div>
 
-        <div class="form-block" formGroupName="task">
-          <label for="Date">Когда нужно решить:</label>
+        <hr>
 
-          <div class="few-inputs-container-horizontal">
-            <div class="iconed-input-block">
-              <input id="Date"
-                     class="control"
-                     placeholder="Дата"
-                     name="date"
-                     formControlName="date"
-                     ngbDatepicker #d="ngbDatepicker"
-                     autocomplete="off"
-                     (click)="d.toggle()">
-              <span class="input-icon">
-                <i class="material-icons">date_range</i>
-              </span>
+        <form [formGroup]="applicationEditFormGroup" (ngSubmit)="submit()">
+            <div class="row">
+                <div class="col controls-block">
+                    <button *ngIf="applicationEditFormGroup.value.status < 3"
+                            type="button"
+                            (click)="incStatus()"
+                            class="btn btn-default">
+                        {{nextStatusButtonText}}
+                    </button>
+                    <div *ngIf="applicationEditFormGroup.value.status >= 3"
+                         class="complete">
+                        <i class="material-icons">done</i>
+                        <span>Завершена</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="iconed-input-block">
-              <input id="Time"
-                     class="control"
-                     name="time"
-                     formControlName="time"
-                     [textMask]="{mask: timeMask}"
-                     pattern="^([0-1]\d|2[0-3]):([0-5]\d)"
-                     placeholder="Время">
-              <span class="input-icon">
-                <i class="material-icons">access_time</i>
-              </span>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-block">
+                        <label for="workman">Исполнитель:</label>
+
+                        <select id="workman"
+                                class="control"
+                                formControlName="workman">
+                            <option [ngValue]="null"
+                                    [selected]="applicationEditFormGroup.value.workman == null">
+                                Не назначен
+                            </option>
+                            <option *ngFor="let employee of employees"
+                                    [ngValue]="employee"
+                                    [selected]="applicationEditFormGroup.value.workman && applicationEditFormGroup.value.workman.id == employee.id">
+                                {{employee.firstName + ' ' + employee.lastName}}
+                            </option>
+                        </select>
+                        <a *ngIf="applicationEditFormGroup.value.status < 3"
+                           (click)="appointToMe()"
+                           class="toggle-link">
+                            Назначить мне
+                        </a>
+                    </div>
+                </div>
+
+                <div class="         col-md-6 col-sm-6 col-xs-12">
+
+                    <div class="form-block">
+                        <label for="status"
+                               class="">Статус:</label>
+
+                        <select id="status" class=""
+                                class="control"
+                                formControlName="status">
+                            <option value="" disabled selected>Выберите статус</option>
+                            <option *ngFor="let status of statuses" [ngValue]="status.id">{{status.name}}
+                            </option>
+                        </select>
+                        <a *ngIf="applicationEditFormGroup.value.status < 3"
+                           (click)="incStatus()"
+                           class="toggle-link">
+                            {{nextStatusButtonText}}
+                        </a>
+                    </div>
+
+
+                </div>
             </div>
-          </div>
-        </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12" formGroupName="task">
+                    <div class="form-block">
+                        <label for="problemName"
+                               class="label-bold">Тема:</label>
+
+                        <input id="problemName"
+                               class="control"
+                               formControlName="name"
+                               placeholder="Место для темы">
+                    </div>
+
+                    <div class="form-block">
+                        <label for="problemDesc">Описание:</label>
+
+                        <textarea id="problemDesc"
+                                  class="control"
+
+                                  name="problemDesc"
+                                  formControlName="description"
+                                  placeholder="Место для описания"
+                                  rows="5"></textarea>
+                    </div>
+                </div>
+                <div class=" col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-block" formGroupName="customer">
+                        <label for="customerName">Контактные данные:</label>
+
+                        <div class="few-inputs-container">
+                            <div class="iconed-input-block">
+                                <input id="customerName"
+                                       class="control"
+                                       formControlName="fio"
+                                       placeholder="Имя Фамилия">
+                                <span class="input-icon"><i class="material-icons">person</i></span>
+                            </div>
+                            <div class="iconed-input-block">
+                                <input id="customerEmail"
+                                       class="control"
+                                       formControlName="email"
+                                       placeholder="E-mail"
+                                       type="email"
+                                       pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'>
+
+                                <span class="input-icon"><i class="material-icons">email</i></span>
+                            </div>
+                            <div class="iconed-input-block">
+                                <input id="customerTelephone"
+                                       class="control"
+                                       formControlName="telephone"
+                                       [textMask]="{mask: phoneMask}"
+                                       pattern="\+7 \((\d\d\d)\) \d\d\d \d\d \d\d"
+                                       placeholder="Телефон"
+                                       type="tel"/>
+                                <span class="input-icon"><i class="material-icons">phone</i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-block" formGroupName="task">
+                        <label for="Date">Когда нужно решить:</label>
+
+                        <div class="few-inputs-container-horizontal">
+                            <div class="iconed-input-block">
+                                <input id="Date"
+                                       class="control"
+                                       placeholder="Дата"
+                                       name="date"
+                                       formControlName="date"
+                                       ngbDatepicker #d="ngbDatepicker"
+                                       autocomplete="off"
+                                       (click)="d.toggle()">
+                                <span class="input-icon"><i class="material-icons">date_range</i></span>
+                            </div>
+
+                            <div class="iconed-input-block">
+                                <input id="Time"
+                                       class="control"
+                                       name="time"
+                                       formControlName="time"
+                                       [textMask]="{mask: timeMask}"
+                                       pattern="^([0-1]\d|2[0-3]):([0-5]\d)"
+                                       placeholder="Время">
+                                <span class="input-icon"><i class="material-icons">access_time</i></span>
+                            </div>
+                        </div>
+                    </div>
 
 
-      </div>
+                </div>
 
-      <div class="address  col-md-12 col-sm-12 col-xs-12" formGroupName="task">
-        <div class="form-block address-input">
-          <label for="problemDesc">Адрес:</label>
+                <div class="address  col-md-12 col-sm-12 col-xs-12" formGroupName="task">
+                    <div class="form-block address-input">
+                        <label for="problemDesc">Адрес:</label>
 
-          <div class="iconed-input-block">
-            <input
-              class="control"
-              id="Address"
-              name="address"
-              formControlName="address"
-              placeholder="Адрес"/>
+                        <div class="iconed-input-block">
+                            <input
+                                class="control"
+                                id="Address"
+                                name="address"
+                                formControlName="address"
+                                placeholder="Адрес"/>
 
-            <span class="input-icon">
-              <i class="material-icons">location_on</i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+                            <span class="input-icon"><i class="material-icons">location_on</i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <hr>
+            <hr>
 
-    <div class="row">
-      <div class="comment col-md-12 col-sm-12 col-xs-12">
-        <div class="form-block problem-ext-input">
-          <label for="comment">Комментарий:</label>
-          <textarea id="comment"
-                    class="control"
-                    name="comment"
-                    formControlName="comment"
-                    placeholder=""
-                    rows="4"></textarea>
-        </div>
-      </div>
-    </div>
+            <div class="row">
+                <div class="comment col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-block problem-ext-input">
+                        <label for="comment">Комментарий:</label>
+                        <textarea id="comment"
+                                  class="control"
+                                  name="comment"
+                                  formControlName="comment"
+                                  placeholder=""
+                                  rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
 
-    <div class="row">
-      <div class="col buttons-col">
-        <a routerLink="../../" class="btn">
-          Назад
-        </a>
-        <button type="submit"
-                class="btn btn-primary"
-                [disabled]="applicationEditFormGroup.invalid || loading">
-          <span *ngIf="loading">Загрузка</span>
-          <span *ngIf="!loading">Сохранить</span>
-        </button>
-      </div>
-    </div>
-  </form>
+            <div class="row">
+                <div class="col buttons-col">
+                    <a routerLink="../../" class="btn">
+                        Назад
+                    </a>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            [disabled]="applicationEditFormGroup.invalid || saving">
+                        <span *ngIf="saving">Загрузка</span>
+                        <span *ngIf="!saving">Сохранить</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </loadable>
 </div>

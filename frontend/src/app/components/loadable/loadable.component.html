@@ -1,0 +1,9 @@
+<div class="loadable-content"
+     [style.display]="loading && hideContent ? 'none' : 'block'">
+    <ng-content></ng-content>
+</div>
+<div class="loader-background"
+     *ngIf="loading"
+     [style.backgroundColor]="blur ? backgroundColor : 'transparent'">
+    <div [class]="loaderClass">{{text}}</div>
+</div>

@@ -21,14 +21,23 @@ app.post('/auth/login', function (req, res) {
             if (employee.password != req.body.password) {
                 res.status(401).json({success: false, message: 'Неверный пароль.'});
             } else {
-                console.log(config.secret);
-                var token = jwt.sign(employee, config.secret, {
-                    expiresIn: config.sessionLength // 24 hours
+                const payload = {
+                    employeeId: employee.id,
+                    username: employee.username,
+                    email: employee.email,
+                    firstName: employee.firstName,
+                    lastName: employee.lastName,
+                    telephone: employee.telephone,
+                    telegram: employee.telegram,
+                    role: employee.role,
+                };
+                let token = jwt.sign(payload, config.secret, {
+                    expiresIn: config['sessionLength'] // 24 hours
                 });
 
                 res.status(200).json({
                     success: true,
-                    message: 'Аутентификация выполнена.',
+                    message: 'Аутентификация выполнена!',
                     token: token,
                     employeeId: employee.id
 

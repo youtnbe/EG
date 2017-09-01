@@ -52,7 +52,8 @@ app.post('/applications', (req, res) => {
 });
 
 
-app.put('/applications', (req, res) => {
+app.put('/applications/:id', (req, res) => {
+    var id = req.params.id;
 
     if (!req.body) {
         return res.status(400).json({
@@ -83,7 +84,7 @@ app.put('/applications', (req, res) => {
 
     };
 
-    Application.findByIdAndUpdate(body._id, application, (err, app) => {
+    Application.findOneAndUpdate({applicationId: id}, application, (err, app) => {
         if (err) {
             if (err.name = 'ValidationError') {
                 return res.status(400).json({
@@ -138,8 +139,6 @@ app.get("/applications", (req, res) => {
         delete filter['workman.id'];
     }
 
-    console.log(filter);
-
     Application.count(filter, (err, count) => {
         if (err) {
             return res.status(500).json({
@@ -147,8 +146,7 @@ app.get("/applications", (req, res) => {
                 message: 'Ошибка сервера.'
             });
         }
-        console.log(page);
-        console.log(pageSize);
+
         Application.find(filter).sort(sort).skip(page * pageSize).limit(pageSize).find({}, (err, docs) => {
             if (err) {
                 return res.status(500).json({
@@ -166,7 +164,7 @@ app.get("/applications", (req, res) => {
 
 app.get("/applications/:id", (req, res) => {
     var id = req.params.id;
-    Application.findById(id, (err, doc) => {
+    Application.find({applicationId: id}, (err, doc) => {
         if (err) {
             return res.status(500).json({
                 success: false,
@@ -174,10 +172,7 @@ app.get("/applications/:id", (req, res) => {
                 error: err
             });
         }
-        res.status(200).json({
-            data: doc,
-            length: 1
-        });
+        res.status(200).json(doc[0]);
     });
 });
 
@@ -199,7 +194,7 @@ app.delete("/applications", (req, res) => {
 
 app.delete("/applications/:id", (req, res) => {
     var id = req.params.id;
-    Application.remove({_id: id}, (err, docs) => {
+    Application.remove({applicationId: id}, (err, docs) => {
         if (err) {
             return res.status(500).json({
                 success: false,

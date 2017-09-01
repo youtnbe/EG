@@ -1,18 +1,15 @@
-import { Component, Input, OnChanges, SimpleChange, ChangeDetectionStrategy, NgZone, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Message} from "../../services/overlay.service";
+
 @Component({
-  selector: 'confirm',
-  templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.scss']
+    selector: 'confirm',
+    templateUrl: './confirm.component.html',
+    styleUrls: ['./confirm.component.scss']
 })
-export class Confirm {
+export class ConfirmComponent implements Message {
+    @Input() body: string = 'Вы уверены?';
+    @Input() buttonYes: string = 'Да';
+    @Input() buttonNo: string = 'Нет';
+    @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Output() onConfirm = new EventEmitter<boolean>();
-
-  constructor() {
-  }
-
-  confirm(answer:boolean) {
-    this.onConfirm.emit(answer);
-  }
 }

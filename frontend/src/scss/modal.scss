@@ -1,0 +1,73 @@
+.modal-container {
+
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .4);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    flex-direction: column;
+    overflow: auto;
+
+    .modal-body {
+
+        padding: 0;
+        flex: 0 1 auto;
+
+        position: relative;
+        border: 2px solid blue;
+        background: white;
+        width: 200px;
+        margin: 10px;
+        box-shadow: 10px 10px 0 rgba(0, 0, 0, .3);
+
+
+
+        .modal-message {
+            padding: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            button {
+                display: block;
+                font-weight: normal;
+
+                line-height: 1.25;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                user-select: none;
+                border: 1px solid transparent;
+                padding: 0.5rem 0.75rem;
+                font-size: 1.5rem;
+
+                border-radius: 0;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+                width: 100%;
+                letter-spacing: .5rem;
+                outline: none;
+
+                color: blue;
+                background-color: white;
+
+                &:hover {
+                    color: white;
+                    background-color: blue;
+                }
+            }
+        }
+    }
+}
+
+

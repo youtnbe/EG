@@ -5,8 +5,8 @@ var config = require('./../config');
 app.use(function (req, res, next) {
 
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['token'] || req.headers['x-access-token'];
-
+    var token = req.headers['authorization'];
+    token = token.slice(token.indexOf(' ') + 1);
     // decode token
     if (token) {
         // verifies secret and checks exp

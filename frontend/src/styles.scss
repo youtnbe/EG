@@ -5,27 +5,28 @@
 @import "scss/datepicker";
 @import "scss/app-statuses";
 @import "scss/blocks";
+@import "scss/modal";
 
 body {
 }
 
 *::selection {
-  background-color: blue;
-  color: white;
+    background-color: blue;
+    color: white;
 }
 
 a {
-  color: blue;
-  &:hover {
-    text-decoration: underline;
     color: blue;
-  }
-  &:active {
+    &:hover {
+        text-decoration: underline;
+        color: blue;
+    }
+    &:active {
 
-  }
+    }
 
 }
 
 a[href^='tel:'] {
-  white-space: nowrap;
+    white-space: nowrap;
 }

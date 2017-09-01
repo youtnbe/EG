@@ -46,5 +46,5 @@ var applicationScheme = new Schema({
         default: ''
     }
 });
-applicationScheme.plugin(autoIncrement.plugin, {model: 'Application', field: 'number', startAt: 1026});
+applicationScheme.plugin(autoIncrement.plugin, {model: 'Application', field: 'applicationId', startAt: 1026});
 module.exports = mongoose.model("Application", applicationScheme);

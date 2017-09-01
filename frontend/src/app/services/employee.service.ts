@@ -1,24 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Response, Headers} from '@angular/http';
-import {URLSearchParams, QueryEncoder} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {AuthHttp} from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import * as _ from 'lodash';
 
-import { AppSettings } from '../appSettings';
+import {AppSettings} from '../appSettings';
 
-import { AuthService } from './auth.service';
-import { PageableSortableCollection } from './pageable-sortable-collection.service';
+import {PageableSortableCollection} from './pageable-sortable-collection.service';
+import {Employee} from "../models/employee";
 
 @Injectable()
-export class EmployeeService extends PageableSortableCollection {
+export class EmployeeService extends PageableSortableCollection<Employee> {
 
-  url:string = AppSettings.API_ENDPOINT + 'employees';
-
-  constructor(protected http:Http, protected authService:AuthService) {
-    super(http, authService);
-  }
+    constructor(protected http: AuthHttp) {
+        super(http);
+        this.url = AppSettings.API_ENDPOINT + 'employees';
+        this.idAttribute = 'employeeId';
+    }
 }

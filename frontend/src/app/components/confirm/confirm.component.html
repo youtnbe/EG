@@ -1,10 +1,9 @@
-<div class="confirm-container">
-  <div class="confirm-body">
-    <div class="confirm-message">Вы уверены, что хотите удалить данную запись?</div>
-    <div class="confirm-buttons">
-      <button (click)="confirm(true)">Да</button>
-      <button (click)="confirm(false)">Нет</button>
+<div class="modal-body">
+    <div class="modal-message"
+         [innerHTML]="body"></div>
+    <div class="modal-buttons">
+        <button (click)="close.emit(true)">{{buttonYes}}</button>
+        <button (click)="close.emit(false)">{{buttonNo}}</button>
     </div>
-  </div>
 </div>
 

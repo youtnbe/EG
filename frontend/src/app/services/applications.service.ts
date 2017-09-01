@@ -1,5 +1,5 @@
 import {Injectable, Inject, Optional} from '@angular/core';
-import {Http} from '@angular/http';
+import {AuthHttp} from 'angular2-jwt';
 import {Response, Headers} from '@angular/http';
 import {URLSearchParams, QueryEncoder} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
@@ -8,17 +8,22 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import * as _ from 'lodash';
 
-import { AppSettings } from '../appSettings';
+import {AppSettings} from '../appSettings';
 
-import { AuthService } from './auth.service';
-import { PageableSortableCollection } from './pageable-sortable-collection.service';
+import {AuthService} from './auth.service';
+import {PageableSortableCollection} from './pageable-sortable-collection.service';
+import {Application} from "../models/application";
 
 @Injectable()
-export class ApplicationsService extends PageableSortableCollection {
+export class ApplicationsService extends PageableSortableCollection<Application> {
 
-  url:string = AppSettings.API_ENDPOINT + 'applications';
+    constructor(protected http: AuthHttp) {
+        super(http);
+        this.url = AppSettings.API_ENDPOINT + 'applications';
+        this.idAttribute = 'applicationId';
+    }
 
-  constructor(protected http:Http, protected authService:AuthService) {
-    super(http, authService);
-  }
+    create(item: any) {
+        return new Application(item);
+    }
 }

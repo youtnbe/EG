@@ -1,7 +1,6 @@
 var app = (require('express').Router)();
 var Employee = require('./../models').Employee;
 
-//ОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИОШИБКИ
 app.post('/employees', (req, res) => {
 
     if (!req.body)
@@ -51,7 +50,7 @@ app.get("/employees", (req, res) => {
             });
         }
         Employee.find(filter).sort(sort).skip(page * pageSize).limit(pageSize).find({}, (err, docs) => {
-            if (err){
+            if (err) {
                 return res.status(500).json({
                     success: false,
                     message: 'Ошибка сервера.'
@@ -67,23 +66,35 @@ app.get("/employees", (req, res) => {
 });
 
 app.delete("/employees", (req, res) => {
-    if (req.query.id) {
-        Employee.remove({_id: req.query.id}, (err, docs) => {
-            if (err)
-                return console.log(err);
+    Employee.remove({}, (err, docs) => {
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                message: 'Ошибка сервера.'
+            });
+        }
 
-            console.log(docs);
-            res.send(docs);
+        res.status(200).json({
+            success: true,
+            message: 'Заявки успешно удалены!'
         });
-    } else {
-        Employee.remove({}, (err, docs) => {
-            if (err)
-                return console.log(err);
+    });
+});
 
-            console.log(docs);
-            res.send(docs);
+app.delete("/employees/:id", (req, res) => {
+    var id = req.params.id;
+    Employee.remove({employeeId: id}, (err, docs) => {
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                message: 'Ошибка сервера.'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: 'Заявка успешно удалена!'
         });
-    }
+    });
 });
 
 app.get("/employees/length", (req, res) => {
